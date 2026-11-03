@@ -1,0 +1,33 @@
+_ > nanoagent.plugin.v0001.ManifestConfig:
+id: pogo-calculate-verifier
+name: Pokémon GO IV Calculator
+version: 0.1.0
+status: in-development
+spec: nanoagent.plugin/v0001
+
+runtime > nanoagent.plugin.v0001.RuntimeConfig:
+  type: mcp_stdio
+  command: [uv, run, --frozen, python, -m, plugin]
+
+permissions > nanoagent.plugin.v0001.PermissionsConfig:
+  network > nanoagent.plugin.v0001.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
+    write: []
+
+tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
+  calculate_ivs:
+    description: Calculate all Pokémon GO IVs and levels that fit an observed catch
+tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
+  calculate-ivs:
+    description: |-
+      Calculate compatible IVs and Pokémon levels for a fresh, unchanged Pokémon from a standard
+      wild, weather-boosted wild, egg, research, raid or weather-boosted raid encounter.
+      Ask for species and form if relevant, encounter type, and caught CP if missing.
+      Use null for unreported max HP, trainer level at capture or egg acquisition, and appraisal.
+      Powered-up, evolved, traded, Shadow, purified, buddy-boosted and special event encounters
+      with different rules are unsupported. Report uncertainty when several spreads fit.
+    runner: tool
+    tools: [calculate_ivs]
+    reference: null
+    instructions: Calculate and display all compatible spreads using the reported observations.

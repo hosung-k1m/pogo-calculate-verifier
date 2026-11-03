@@ -1,0 +1,9 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+tagline: Find the IVs that fit your Pokémon GO catch.
+summary: Enter the species, encounter and CP to see every compatible Attack, Defense and HP IV spread.
+highlights:
+  - Use appraisal or max HP to narrow the results.
+  - Each result is checked by deterministic code.
+steps:
+  - Enter species or form, encounter type and caught CP.
+  - Add any known appraisal, max HP or trainer level at acquisition.

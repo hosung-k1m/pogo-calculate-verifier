@@ -1,0 +1,15 @@
+.iv-result table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.iv-result :is(th, td) {
+  padding: .35rem .5rem;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+}
+
+.iv-result button {
+  margin-top: .75rem;
+}
