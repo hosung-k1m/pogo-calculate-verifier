@@ -1,6 +1,6 @@
 _ > nanoagent.plugin.v0001.ProductConfig:
 tagline: Find the IVs that fit your Pokémon GO catch.
-summary: Exmaple prompt: I caught a Mewtwo at 2,387 CP from a regular raid with no weather boost. Find every matching IV spread and Pokémon level
+summary: Exmaple prompt -"I caught a Mewtwo at 2,387 CP from a regular raid with no weather boost. Find every matching IV spread and Pokémon level"
 highlights:
   - Use appraisal or max HP to narrow the results.
   - Each result is checked by deterministic code.
