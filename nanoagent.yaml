@@ -1,7 +1,7 @@
 _ > nanoagent.plugin.v0001.ManifestConfig:
 id: pogo-calculate-verifier
 name: Pokémon GO IV Calculator
-version: 0.1.5
+version: 0.1.6
 status: ready
 spec: nanoagent.plugin/v0001
 

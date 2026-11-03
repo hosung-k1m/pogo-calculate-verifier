@@ -47,6 +47,25 @@ def test_verifier_rejects_changed_output_and_invalid_input():
     assert observation_problem(replace(RAID, trainer_level=81))
 
 
+def test_verifier_scores_the_submission_against_the_reported_cp():
+    impossible_raid = replace(RAID, cp=237)
+    empty = IVOutput("Mewtwo", [])
+    correct = IVOutput("Mewtwo", [IVSpread(15, 15, 15, [20])])
+    wrong_iv = IVOutput("Mewtwo", [IVSpread(14, 15, 15, [20])])
+    wrong_pokemon = replace(correct, pokemon="Pikachu")
+    for observations, submission, expected in (
+        (impossible_raid, empty, True),
+        (impossible_raid, correct, False),
+        (RAID, empty, False),
+        (RAID, correct, True),
+        (RAID, wrong_iv, False),
+        (RAID, wrong_pokemon, False),
+    ):
+        verdict = verify_task(TASK, observations, submission, None, WORKSPACE)
+        assert verdict["valid"] is expected
+        assert verdict["score"] == float(expected)
+
+
 def test_verifier_accepts_complete_submission_in_any_order():
     spreads = candidates(WILD)
     submission = IVOutput("MAGIKARP", list(reversed(spreads)))
