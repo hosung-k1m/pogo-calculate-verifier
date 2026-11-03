@@ -1,6 +1,7 @@
 import {h} from "./kit/components.js";
 
-function renderIVs({pokemon, spreads}) {
+function renderIVs({pokemon, spreads}, {verdict}) {
+  if (!verdict.valid) return h("p", {text: "The submitted IVs did not pass verification."});
   const root = h("section", {class: "iv-result"}, h("h3", {text: pokemon.replaceAll("_", " ")}));
   if (spreads.length === 0) {
     root.append(h("p", {text: "No IV spread fits these observations. Check the form, encounter, CP, and appraisal."}));

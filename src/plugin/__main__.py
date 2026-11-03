@@ -12,14 +12,19 @@ from mcp.server.lowlevel import Server
 from mcp.server.stdio import stdio_server
 from slimconfig import build_output, output_schema, plain_output
 
-from contract import TOOLS, Tool
-from plugin import calculate_ivs
+from contract import TOOLS, AcknowledgeOutput, Tool
 
 server = Server("pogo-calculate-verifier")
 # NanoAgent names the one folder this plugin may write to.
 WORKSPACE_ENV = "NANOAGENT_WORKSPACE"
+
+
 # Each tool's implementation: (its input, the workspace) -> its output, as contract.TOOLS types them.
-IMPLEMENTATIONS = {Tool.CALCULATE_IVS: calculate_ivs}
+def acknowledge(_value, _workspace):
+    return AcknowledgeOutput(True)
+
+
+IMPLEMENTATIONS = {Tool.ACKNOWLEDGE: acknowledge}
 
 
 @server.list_tools()

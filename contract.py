@@ -6,7 +6,7 @@ from slimconfig import Output
 
 
 class Tool(Enum):
-    CALCULATE_IVS = "calculate_ivs"
+    ACKNOWLEDGE = "acknowledge"
 
 
 class Task(Enum):
@@ -49,5 +49,15 @@ class IVOutput(Output):
     spreads: Annotated[list[IVSpread], "Every compatible IV spread and all its possible Pokémon levels"]
 
 
-TOOLS = {Tool.CALCULATE_IVS: (IVInput, IVOutput)}
-TASKS = {Task.CALCULATE_IVS: TOOLS[Tool.CALCULATE_IVS]}
+@dataclass
+class AcknowledgeInput(Output):
+    pass
+
+
+@dataclass
+class AcknowledgeOutput(Output):
+    acknowledged: bool
+
+
+TOOLS = {Tool.ACKNOWLEDGE: (AcknowledgeInput, AcknowledgeOutput)}
+TASKS = {Task.CALCULATE_IVS: (IVInput, IVOutput)}

@@ -8,13 +8,13 @@ from a regular raid.”** The one result is **15/15/15 at level 20**.
 
 | Tool | Does | Code |
 |---|---|---|
-| `calculate_ivs` | Calculates all matching spreads and levels from observed catch data | `src/plugin/calculate.py` |
+| `acknowledge` | Returns a fixed acknowledgement with no catch data | `src/plugin/__main__.py` |
 
 ### Tasks
 
 | Task | Does | Runner |
 |---|---|---|
-| `calculate-ivs` | Returns a verified set of IV spreads and Pokémon levels | `tool`, with `calculate_ivs` |
+| `calculate-ivs` | Returns a verified set of IV spreads and Pokémon levels | `agent` |
 
 Supply the species or form, caught CP, and encounter type. Max HP, trainer level
 at acquisition, appraisal stars, and exact appraisal bars are optional. Use 4
@@ -38,12 +38,11 @@ exceptions require separate rules.
 
 ## Layout
 
-The plugin follows [arxiv-source](https://github.com/zeyuyang8/arxiv-source).
-`contract.py` defines typed input and output. The MCP tool uses the enumerator
-in `verifier/iv.py`. The verifier validates the input and independently
-recomputes the expected set when it receives a tool result or task result. It
-rejects omissions, extra entries and incorrect levels. `ui/` shows the verified
-set in the Result tab.
+The agent solves the task from the observations and submits a typed answer.
+The plugin spec requires a declared tool, so the agent can also call an
+acknowledgement that always returns the same value. The IV enumerator runs
+inside the verifier after submission. It checks the species and compares
+the submitted spreads and levels with the complete expected set.
 
 The enumerator adds the IVs to the base Attack, Defense and Stamina of the form.
 It calculates CP as the floored product of Attack, the square roots of Defense
